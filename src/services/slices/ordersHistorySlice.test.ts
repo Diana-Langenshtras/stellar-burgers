@@ -34,6 +34,7 @@ describe('Проверка слайса ordersSlice', () => {
     expect(state.loading).toBe(false);
     expect(state.orderDetails).toEqual(mockOrder);
     expect(state.orderClaim).toBe(false);
+    expect(state.orderError).toBeNull();
   });
 
   test('обрабатывает ошибку при создании заказа', () => {
@@ -51,5 +52,6 @@ describe('Проверка слайса ordersSlice', () => {
     const action = clearOrders();
     const state = ordersSlice.reducer(stateWithOrder, action);
     expect(state.orderDetails).toBeNull();
+    expect(state.orderError).toBeNull();
   });
 });

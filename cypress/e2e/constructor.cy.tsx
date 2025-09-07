@@ -58,12 +58,14 @@ describe('Тесты для конструктора бургера без пе�
 
     cy.contains(ingredientBun).click();
     cy.get(selectorModal).should('be.visible');
+    cy.get(selectorModal).should('contain.text', ingredientBun);
 
     cy.get(selectorButtonCloseModal).click();
     cy.get(selectorModal).should('not.exist');
 
     cy.contains(ingredientBun).click();
     cy.get(selectorModal).should('exist');
+    cy.get(selectorModal).should('contain.text', ingredientBun);
     cy.get(selectorOverlayModal).click({ force: true });
     cy.get(selectorModal).should('not.exist');
   });

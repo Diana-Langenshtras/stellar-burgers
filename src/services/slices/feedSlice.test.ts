@@ -2,14 +2,14 @@ import { expect, test } from '@jest/globals';
 import { feedSlice, fetchFeeds, initialState } from './feedSlice';
 
 describe('feedSlice', () => {
-  test('fetchFeeds.pending sets isLoading to true', () => {
+  test('fetchFeeds.pending устанавливает isLoading в значение true и обнуляет ошибку', () => {
     const action = { type: fetchFeeds.pending.type };
     const state = feedSlice.reducer(initialState, action);
     expect(state.isLoading).toBe(true);
-    expect(state.error).toBe(null);
+    expect(state.error).toBeNull();
   });
 
-  test('fetchFeeds.fulfilled sets feed and isLoading to false', () => {
+  test('fetchFeeds.fulfilled устанавливает feed и isLoading в значение false и обнуляет ошибку', () => {
     const feedData = {
       total: 100,
       totalToday: 10,
@@ -21,9 +21,10 @@ describe('feedSlice', () => {
     expect(state.feed.totalToday).toBe(10);
     expect(state.orders).toEqual(feedData.orders);
     expect(state.isLoading).toBe(false);
+    expect(state.error).toBeNull();
   });
 
-  test('fetchFeeds.rejected sets error and isLoading to false', () => {
+  test('fetchFeeds.rejected устанавливает значение error и isLoading в значение false', () => {
     const errorMessage = 'Error message';
     const action = {
       type: fetchFeeds.rejected.type,

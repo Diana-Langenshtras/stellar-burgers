@@ -17,6 +17,7 @@ describe('profileUserSlice', () => {
     const state = profileSlice.reducer(initialState, action);
     expect(state.isLoading).toBe(false);
     expect(state.user).toEqual({ name: 'Иван', email: 'ivan@mail.ru' });
+    expect(state.error).toBeNull();
   });
 
   test('обрабатывает экшен getUser.rejected', () => {

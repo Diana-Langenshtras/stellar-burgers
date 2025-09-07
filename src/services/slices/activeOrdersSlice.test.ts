@@ -6,15 +6,15 @@ import {
 } from './activeOrdersSlice';
 
 describe('submittedOrdersSlice', () => {
-  test('fetchSubmitOrders.pending устанавливает fetchingStatus в true', () => {
+  test('fetchSubmitOrders.pending устанавливает fetchingStatus в true и обнуляет ошибку', () => {
     const action = { type: fetchSubmitOrders.pending.type };
     const state = submittedOrdersSlice.reducer(initialState, action);
     expect(state.fetchingStatus).toBe(true);
     expect(state.orders).toEqual([]);
-    expect(state.error).toBe(null);
+    expect(state.error).toBeNull();
   });
 
-  test('fetchSubmitOrders.fulfilled устанавливает заказы и fetchingStatus в false', () => {
+  test('fetchSubmitOrders.fulfilled устанавливает заказы и fetchingStatus в false и обнуляет ошибку', () => {
     const ordersData = [{ id: '1', name: 'Order 1' }];
     const action = {
       type: fetchSubmitOrders.fulfilled.type,
@@ -23,6 +23,7 @@ describe('submittedOrdersSlice', () => {
     const state = submittedOrdersSlice.reducer(initialState, action);
     expect(state.orders).toEqual(ordersData);
     expect(state.fetchingStatus).toBe(false);
+    expect(state.error).toBeNull();
   });
 
   test('fetchSubmitOrders.rejected устанавливает ошибку и fetchingStatus в false', () => {
@@ -32,6 +33,7 @@ describe('submittedOrdersSlice', () => {
       error: { message: errorMessage }
     };
     const state = submittedOrdersSlice.reducer(initialState, action);
+
     expect(state.error).toBe(errorMessage);
     expect(state.fetchingStatus).toBe(false);
   });
