@@ -12,7 +12,7 @@ type TIngredientsSliceState = {
   error: string | null;
 };
 
-const initialState: TIngredientsSliceState = {
+export const initialState: TIngredientsSliceState = {
   ingredients: [],
   isLoading: false,
   error: null
